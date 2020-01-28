@@ -20,8 +20,8 @@ The syntax in this extension defines the following scopes (and more):
 * `invalid.illegal.unescaped-quote.octave`
 * `invalid.illegal.incomplete-variable-assignment.octave`
 * `keyword.control.octave`
-* `keyword.structure.octave`
-* `keyword.special.octave`
+* `keyword.other.structure.octave`
+* `keyword.other.special.octave`
 * `keyword.operator.symbols.octave`
 * `keyword.operator.transpose.octave`
 * `meta.brackets.curly.octave`

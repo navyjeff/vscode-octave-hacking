@@ -14,7 +14,9 @@
 	</array>
 	<key>patterns</key>
 	<array>
-		<dict>
+		<dict> <!-- meta.function.with-argouts -->
+			<key>name</key>
+			<string>meta.function.with-argouts.octave</string>
 			<key>begin</key>
 			<string>(?x)
 				(?=function\b)
@@ -49,8 +51,6 @@
 					<string>entity.name.function.octave</string>
 				</dict>
 			</dict>
-			<key>contentName</key>
-			<string>variable.parameter.input.function.octave</string>
 			<key>end</key>
 			<string>\)</string>
 			<key>endCaptures</key>
@@ -61,10 +61,21 @@
 					<string>punctuation.definition.parameters.octave</string>
 				</dict>
 			</dict>
-			<key>name</key>
-			<string>meta.function.with-argouts.octave</string>
+			<key>contentName</key>
+			<string>variable.parameter.input.function.octave</string>
 		</dict>
-		<dict>
+		<dict> <!-- meta.function.without-argouts -->
+			<key>name</key>
+			<string>meta.function.without-argouts.octave</string>
+			<key>match</key>
+			<string>(?x)
+				(?=function\b)
+				(?&lt;=^|\s)(function)\s+   # the function keyword
+				(?&gt;\[(.*)\])?            # match various different combination of output arguments
+				((?&gt;[a-zA-Z_]\w*))?
+				(?&gt;\s*=\s*)?
+				((?&gt;[a-zA-Z_][\w\.]*(?&gt;[?!]|=(?!&gt;))? )) # the function name
+			</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -88,16 +99,6 @@
 					<string>entity.name.function.octave</string>
 				</dict>
 			</dict>
-			<key>match</key>
-			<string>(?x)
-				(?=function\b)
-				(?&lt;=^|\s)(function)\s+ # the function keyword
-				(?&gt;\[(.*)\])? # match various different combination of output arguments
-				((?&gt;[a-zA-Z_]\w*))?
-				(?&gt;\s*=\s*)?
-				((?&gt;[a-zA-Z_][\w\.]*(?&gt;[?!]|=(?!&gt;))? )) # the function name</string>
-			<key>name</key>
-			<string>meta.function.without-argouts.octave</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -474,7 +475,8 @@
 			<string>(?x)
 				\b(argv|e|eps|false|filesep|F_DUPFD|F_GETFD|F_GETFL|F_SETFD|F_SETFL
 				|i|I|inf|Inf|j|J|NA|nan|NaN
-				|O_APPEND|O_ASYNC|O_CREAT|OCTAVE_HOME|OCTAVE_VERSION|O_EXCL|O_NONBLOCK|O_RDONLY|O_RDWR|O_SYNC|O_TRUNC|O_WRONLY
+				|O_APPEND|O_ASYNC|O_CREAT|OCTAVE_HOME|OCTAVE_VERSION|O_EXCL|O_NONBLOCK
+				|O_RDONLY|O_RDWR|O_SYNC|O_TRUNC|O_WRONLY
 				|pi|program_invocation_name|program_name|P_tmpdir|realmax|realmin
 				|SEEK_CUR|SEEK_END|SEEK_SET|SIG|stderr|stdin|stdout|true
 				|ans|automatic_replot|beep_on_error|completion_append_char|crash_dumps_octave_core|current_script_file_name
@@ -490,9 +492,10 @@
 				|save_header_format_string|save_precision|saving_history|sighup_dumps_octave_core|sigterm_dumps_octave_core
 				|silent_functions|split_long_rows|string_fill_char|struct_levels_to_print|suppress_verbose_help_message
 				|variables_can_hide_functions
-				|warn_assign_as_truth_value|warn_divide_by_zero|warn_empty_list_elements|warn_fortran_indexing
-				|warn_function_name_clash|warn_future_time_stamp|warn_imag_to_real|warn_matlab_incompatible|warn_missing_semicolon
-				|warn_neg_dim_as_zero|warn_num_to_str|warn_precedence_change|warn_reload_forces_clear|warn_resize_on_range_error
+				|warn_assign_as_truth_value|warn_divide_by_zero|warn_empty_list_elements
+				|warn_fortran_indexing|warn_function_name_clash|warn_future_time_stamp|warn_imag_to_real
+				|warn_matlab_incompatible|warn_missing_semicolon|warn_neg_dim_as_zero|warn_num_to_str
+				|warn_precedence_change|warn_reload_forces_clear|warn_resize_on_range_error
 				|warn_separator_insert|warn_single_quote_string|warn_str_to_num|warn_undefined_return_values
 				|warn_variable_switch_label
 				|whos_line_format
@@ -523,7 +526,7 @@
 			<string>(?x)\b(classdef|endclassdef|endevents|endenumeration|endmethods|endproperties
 				|enumeration|events|methods|properties)</string>
 			<key>name</key>
-			<string>keyword.structure.octave</string>
+			<string>keyword.other.structure.octave</string>
 		</dict>
 		<key>octave_special_functions</key>
 		<dict>
@@ -533,7 +536,7 @@
 			<string>\b(dbclear|dbstatus|dbstop|dbtype|dbwhere|diary|keyboard)</string>
 			<key>name</key>
 			<!-- These are not really keywords, but they're reserved, and I dunno what else to call them. -->
-			<string>keyword.special.octave</string>
+			<string>keyword.other.special.octave</string>
 		</dict>
 	<key>operators</key>
 		<dict>
